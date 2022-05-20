@@ -2,12 +2,12 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import RegisterSerializer, LoginSerializer, ActivationSerializer, UserSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import *
 from .helpers import send_confirmation_email
 from django.contrib.auth import get_user_model
 from rest_framework.generics import ListAPIView
 from rest_framework import permissions
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 User = get_user_model()
@@ -36,8 +36,21 @@ class ActivationView(APIView):
             user.save()
             return Response({'msg': 'User Succesfully activated'})
 
+# class LostPassView(APIView):
+#     def post(self, request):
+#         serializer = LostPasswordSerializer(data=request.data)
+#         if serializer.is_valid():
+#             user = serializer.save()
+#             send_confirmation_email(user)
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+
+# class CreateNewPassView(APIView):
+#     def post(self, request):
+#         serializer = CreateNewPasswordSerializer(data=request.data)
+        
+
 
 class UserListAPIView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAdminUser, )
