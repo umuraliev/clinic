@@ -1,0 +1,18 @@
+[0;1;32m●[0m gunicorn.service - gunicorn daemon
+   Loaded: loaded (/etc/systemd/system/gunicorn.service; enabled; vendor preset: enabled)
+   Active: [0;1;32mactive (running)[0m since Sun 2022-05-22 14:07:31 UTC; 7s ago
+ Main PID: 27905 (gunicorn)
+    Tasks: 4 (limit: 4662)
+   CGroup: /system.slice/gunicorn.service
+           ├─27905 /home/umuraliev_r/clinic/venv/bin/python /home/umuraliev_r/clinic/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/umuraliev_r/clinic/myproject.sock app.wsgi:application
+           ├─27933 /home/umuraliev_r/clinic/venv/bin/python /home/umuraliev_r/clinic/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/umuraliev_r/clinic/myproject.sock app.wsgi:application
+           ├─27937 /home/umuraliev_r/clinic/venv/bin/python /home/umuraliev_r/clinic/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/umuraliev_r/clinic/myproject.sock app.wsgi:application
+           └─27938 /home/umuraliev_r/clinic/venv/bin/python /home/umuraliev_r/clinic/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/umuraliev_r/clinic/myproject.sock app.wsgi:application
+
+May 22 14:07:31 clinic systemd[1]: Started gunicorn daemon.
+May 22 14:07:31 clinic gunicorn[27905]: [2022-05-22 14:07:31 +0000] [27905] [INFO] Starting gunicorn 20.1.0
+May 22 14:07:31 clinic gunicorn[27905]: [2022-05-22 14:07:31 +0000] [27905] [INFO] Listening at: unix:/home/umuraliev_r/clinic/myproject.sock (27905)
+May 22 14:07:31 clinic gunicorn[27905]: [2022-05-22 14:07:31 +0000] [27905] [INFO] Using worker: sync
+May 22 14:07:31 clinic gunicorn[27905]: [2022-05-22 14:07:31 +0000] [27933] [INFO] Booting worker with pid: 27933
+May 22 14:07:31 clinic gunicorn[27905]: [2022-05-22 14:07:31 +0000] [27937] [INFO] Booting worker with pid: 27937
+May 22 14:07:32 clinic gunicorn[27905]: [2022-05-22 14:07:31 +0000] [27938] [INFO] Booting worker with pid: 27938

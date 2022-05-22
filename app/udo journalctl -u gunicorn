@@ -1,0 +1,16 @@
+[0;1;31m●[0m gunicorn.service - gunicorn daemon
+   Loaded: loaded (/etc/systemd/system/gunicorn.service; enabled; vendor preset: enabled)
+   Active: [0;1;31mfailed[0m (Result: exit-code) since Fri 2022-05-20 07:23:43 UTC; 25s ago
+  Process: 17459 ExecStart=/home/umuraliev_r/clinic/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/umuraliev_r/clinic/myproject.sock app.wsgi:application [0;1;31m(code=exited, status=1/FAILURE)[0m
+ Main PID: 17459 (code=exited, status=1/FAILURE)
+
+May 20 07:23:43 clinic gunicorn[17459]:     self.stop()
+May 20 07:23:43 clinic gunicorn[17459]:   File "/home/umuraliev_r/clinic/venv/lib/python3.6/site-packages/gunicorn/arbiter.py", line 393, in stop
+May 20 07:23:43 clinic gunicorn[17459]:     time.sleep(0.1)
+May 20 07:23:43 clinic gunicorn[17459]:   File "/home/umuraliev_r/clinic/venv/lib/python3.6/site-packages/gunicorn/arbiter.py", line 242, in handle_chld
+May 20 07:23:43 clinic gunicorn[17459]:     self.reap_workers()
+May 20 07:23:43 clinic gunicorn[17459]:   File "/home/umuraliev_r/clinic/venv/lib/python3.6/site-packages/gunicorn/arbiter.py", line 525, in reap_workers
+May 20 07:23:43 clinic gunicorn[17459]:     raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+May 20 07:23:43 clinic gunicorn[17459]: gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+May 20 07:23:43 clinic systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=1/FAILURE[0m
+May 20 07:23:43 clinic systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Failed with result 'exit-code'.[0m
