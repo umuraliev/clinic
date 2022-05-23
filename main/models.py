@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 class Direction(models.Model):
     title = models.CharField(max_length=200)
@@ -34,3 +36,18 @@ class Doctor(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Review(models.Model):
+    """Отзывы"""
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='doctor')
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    doctor = models.ForeignKey(Doctor, related_name='reviews', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.author}: {self.body}"
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
