@@ -8,7 +8,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Direction
-from .helpers import SpecialityFilter
 
 from main.serializers import DoctorSerializer, ReviewSerializer, SpecialitySerializer
 from .models import *
