@@ -5,9 +5,11 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .permissions import IsAdminClinic
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Direction
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from main.serializers import DoctorSerializer, ReviewSerializer, SpecialitySerializer
 from .models import *
@@ -20,7 +22,9 @@ class DoctorPagination(PageNumberPagination):
 class DoctorViewSet(ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+    permission_classes = [IsAdminClinic, ]
     pagination_class = DoctorPagination
+    parser_classes = (MultiPartParser, FormParser)
     filter_backends = [DjangoFilterBackend, ]
     filter_fields = ['speciality', ]
 

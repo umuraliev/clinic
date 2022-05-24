@@ -4,6 +4,7 @@ from .models import *
 
 
 class DoctorSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(required=False)
     class Meta:
         model = Doctor
         fields = '__all__'
