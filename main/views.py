@@ -2,11 +2,12 @@ from django.shortcuts import render
 from rest_framework.generics import ListAPIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsAdminClinic
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Direction
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -70,3 +71,15 @@ class ReviewViewSet(ModelViewSet):
 
     def get_serializer_context(self):
         return {'request': self.request, 'action': self.action}
+
+
+@api_view(['GET'])
+@login_required
+def toggle_like(request, id):
+    doctor = Doctor.objects.get(id=id)
+    if Like.objects.filter(user=request.user, doctor=doctor).exists():
+        Like.objects.get(user=request.user, doctor=doctor).delete()
+    else:
+        Like.objects.create(user=request.user, doctor=doctor) 
+    serializer = DoctorSerializer(doctor)
+    return Response(serializer.data)

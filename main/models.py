@@ -29,6 +29,7 @@ class Doctor(models.Model):
     image = models.ImageField(upload_to='doctors', blank=True)
     ranks = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
+    experience = models.IntegerField(blank=True)
 
     class Meta:
         verbose_name = 'Doctor'
@@ -51,3 +52,8 @@ class Review(models.Model):
     class Meta:
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, related_name='likes', on_delete=models.CASCADE)

@@ -12,6 +12,7 @@ class DoctorSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['reviews'] = ReviewSerializer(instance.reviews.all(), many=True, context=self.context).data
+        representation['likes']=instance.likes.all().count()
         return representation
 
 
